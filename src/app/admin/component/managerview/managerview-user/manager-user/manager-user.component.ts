@@ -107,7 +107,16 @@ resertPassword(){
     const formData = this.prepareFormData();
     this.userService.postUser(formData).subscribe(
       () => this.openToast('Thêm mới nhân viên thành công'),
-      error => this.openToast(`Error: ${error}`)
+      (error) => {
+      
+        if (error.status === 400) {
+          this.openToast('Nhân viên đã tồn tại.');
+        } else if (error.status === 500) {
+          this.openToast('Lỗi máy chủ. Vui lòng thử lại sau.');
+        } else {
+          this.openToast(`Lỗi: ${error.message || 'Không xác định'}`);
+        }
+      }
     );
   }
 

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Foods } from '../../../../../entity/food/foods';
 import { UsersService } from '../../../../../service/userService/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchFilterUserService } from '../../../../../service/userService/search-filter-user.service';
 import { Users } from '../../../../../entity/user/users';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listuser',
@@ -27,7 +26,6 @@ export class ListuserComponent implements OnInit {
 
   constructor(
     private userService: UsersService,
-
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -61,5 +59,21 @@ paging(numberPage: number) {
 editUser(idUser: string) {
   this.router.navigate(['/admin/manager/managerUser/managerUser', idUser]);
 }
-
+removeUser(idUser: string){
+  this.userService.removeUser(idUser).subscribe(
+    () => { this.openToast("Đã khóa nhân viên thành công");
+    this.getAllUsers(); 
+  },
+    error => this.openToast("Chưa khóa được nhân viên thành công")
+);
+    
+  }
+  
+  openToast(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top', 
+    });
+  }
 }
+

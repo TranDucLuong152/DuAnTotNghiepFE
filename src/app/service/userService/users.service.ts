@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiRespone } from '../../entity/api-respone';
 import { userRequest } from '../../entity/request/user-request';
+import { Users } from '../../entity/user/users';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class UsersService {
     
     return this.http.get<ApiRespone>(this.url+"/api/v1/users/"+idUser);
   }
-
+  removeUser(idUser: String): Observable<ApiRespone> {
+    return this.http.put<ApiRespone>(`${this.url}/api/v1/users/${idUser}/delete`, {});
+}
   postUser(formData: FormData): Observable<ApiRespone> {
     return this.http.post<ApiRespone>(this.url + "/api/v1/users", formData);
   }
@@ -27,6 +30,7 @@ export class UsersService {
   putUser(formData: FormData, idUser: String): Observable<ApiRespone> {
     return this.http.put<ApiRespone>(`${this.url}/api/v1/users/${idUser}`, formData);
 }
+
 // postUser(foodRequest : userRequest, file : File):Observable<ApiRespone>{  
 //   const data = new FormData();
 //   data.append('fullname',foodRequest.fullname)
@@ -38,6 +42,7 @@ export class UsersService {
 // }
 //   return this.http.post<ApiRespone>(this.url+"/api/v1/users",data)
 // }
+
 // putUser(foodRequest : userRequest, file : File,idUser :String):Observable<ApiRespone>{
 //   const data = new FormData();
 //   data.append('fullname',foodRequest.fullname)

@@ -46,7 +46,8 @@
           <th scope="col">Chức năng</th>
           <th scope="col">Đổi mật khẩu</th>
           <th scope="col">Trạng thái</th>
-          <th scope="col">Hành động</th>
+          <th scope="col">Chỉnh sửa</th>
+          <th scope="col">Khóa Nhân viên</th>
         </tr>
       </thead>
       <tbody>
@@ -65,8 +66,12 @@
           <td>{{users.isDeleted?"Đã xóa":"Chưa xóa"}}</td>
           <td>
             <button type="button" (click)="editUser(users.idUser)" class="btn mx-1 btn-outline-secondary">Sửa</button>
+            
           </td>
-          
+          <td>
+            <button type="button" (click)="removeUser(users.idUser)" class="btn mx-1 btn-outline-danger">Khóa Nhân viên</button>  
+          </td>
+         
         </tr>
       </tbody>
     </table>
